@@ -94,7 +94,19 @@ export function validarCliente(cliente) {
 //   { registrado: 3, en_preparacion: 3, listo: 2, entregado: 2 }
 // Con una lista vacía, todos van en 0.
 export function resumenPorEstado(pedidos) {
-  return {} // TODO
+  const resumen = {}
+
+  ESTADOS.forEach(estado => {
+    resumen[estado] = 0
+  })
+
+  pedidos.forEach(pedido => {
+    if (ESTADOS.includes(pedido.estado)) {
+      resumen[pedido.estado]++
+    }
+  })
+
+  return resumen
 }
 
 // ----------------------------------------------------------------------------
