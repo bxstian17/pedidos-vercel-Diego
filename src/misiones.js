@@ -48,7 +48,10 @@ export function totalPedido(pedido) {
 // Un estado que no existe también es false.
 // Pista: ESTADOS ya es un arreglo ordenado. ¿Qué te dice indexOf?
 export function puedeTransicionar(actual, nuevo) {
-  return true // TODO: hoy acepta cualquier cosa. ¿Qué tan grave sería eso en producción?
+   const indiceActual = ESTADOS.indexOf(actual)
+  const indiceNuevo = ESTADOS.indexOf(nuevo)
+
+  return indiceActual !== -1 && indiceNuevo === indiceActual + 1// TODO: hoy acepta cualquier cosa. ¿Qué tan grave sería eso en producción?
 }
 
 // ----------------------------------------------------------------------------
