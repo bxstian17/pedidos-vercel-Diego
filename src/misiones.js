@@ -26,7 +26,16 @@ import { ESTADOS } from './datos.js'
 // Pista: prueba en la consola 0.1 + 0.2 y verás por qué hay que redondear.
 //        Math.round(x * 100) / 100
 export function totalPedido(pedido) {
-  return 0 // TODO
+  const items = pedido.items ?? []
+  const descuento = pedido.descuento ?? 0
+
+  const subtotal = items.reduce((suma, item) => {
+    return suma + item.cantidad * item.precioUnitario
+  }, 0)
+
+  const total = subtotal * (1 - descuento)
+
+  return Math.round((total + Number.EPSILON) * 100) / 100
 }
 
 // ----------------------------------------------------------------------------
