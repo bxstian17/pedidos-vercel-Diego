@@ -118,9 +118,23 @@ export function resumenPorEstado(pedidos) {
 // Pista: 'Ramírez'.normalize('NFD').replace(/[̀-ͯ]/g, '')
 //        Investiga qué hace NFD. Es un problema real en sistemas en español.
 export function buscarPedidos(pedidos, texto) {
-  return [] // TODO
-}
+  const normalizar = texto =>
+    texto
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
 
+  const busqueda = normalizar(texto ?? '')
+
+  if (busqueda === '') {
+    return pedidos
+  }
+
+  return pedidos.filter(pedido =>
+    normalizar(pedido.cliente).includes(busqueda)
+  )
+}
 // ----------------------------------------------------------------------------
 // MISIÓN 6 · DESTACADO — Los mejores clientes
 // ----------------------------------------------------------------------------
